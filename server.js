@@ -9,7 +9,10 @@ import authRoutes from "./routes/authRoutes.js";
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://portfolio-sage-eta-43.vercel.app", "http://localhost:5173"],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use("/api/projects", projectRoutes);
