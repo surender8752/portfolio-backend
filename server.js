@@ -10,9 +10,12 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: ["https://portfolio-sage-eta-43.vercel.app", "http://localhost:5173"],
+  origin: (origin, callback) => {
+    callback(null, true);
+  },
   credentials: true
 }));
+app.options('*', cors()); // Enable pre-flight for all routes
 app.use(express.json());
 
 app.use("/api/projects", projectRoutes);
