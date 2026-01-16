@@ -20,6 +20,11 @@ app.use(express.json());
 
 app.use("/api/projects", projectRoutes);
 app.use("/api/contacts", contactRoutes);
+app.get("/", (req, res) => {
+  res.json({ status: "API is running", version: "1.0.1", endpoints: ["/api/projects", "/api/contacts", "/api/auth/login"] });
+});
+
+console.log("Mounting Auth Routes...");
 app.use("/api/auth", authRoutes);
 
 mongoose
