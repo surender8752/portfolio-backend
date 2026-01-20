@@ -9,7 +9,8 @@ const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret_do_not_use_in_prod";
 
-// ADMIN SIGNUP
+// ADMIN SIGNUP (Disabled)
+/*
 router.post("/signup", async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -36,6 +37,7 @@ router.post("/signup", async (req, res) => {
         res.status(500).json({ message: "Server error during registration" });
     }
 });
+*/
 
 // ADMIN LOGIN
 router.post("/login", async (req, res) => {
