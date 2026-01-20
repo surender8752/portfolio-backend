@@ -1,0 +1,10 @@
+Starting listUsers script...
+MONGO_URI: Found
+Connecting to MongoDB...
+Connected successfully!
+Users found: 3
+- Email: surender123@gmail.com, ID: 696fa55947eddf342fef8044
+- Email: surender@gmail.com, ID: 696faaab371cd47b728eee4c
+- Email: abhishekmahajan0303@gmail.com, ID: 696fac62371cd47b728eee59
+Closing connection...
+Done.

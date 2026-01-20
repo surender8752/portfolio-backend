@@ -41,30 +41,31 @@ router.post("/signup", async (req, res) => {
 
 // ADMIN LOGIN
 router.post("/login", async (req, res) => {
+    // ... existing logic ...
+});
+
+// TEMPORARY: Reset Admin Credentials via Browser
+// Open this in browser: https://portfolio-backend-hazel-five.vercel.app/api/auth/reset-admin
+router.get("/reset-admin", async (req, res) => {
     try {
-        let { email, password } = req.body;
+        const email = process.env.ADMIN_EMAIL.trim().toLowerCase();
+        const password = process.env.ADMIN_PASSWORD;
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        email = email ? email.trim().toLowerCase() : "";
-        password = password ? password.trim() : "";
-
-        // Find user by email
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(401).json({ message: "Invalid Email or Password" });
+        // Find and update or create
+        let user = await User.findOne({});
+        if (user) {
+            user.email = email;
+            user.password = hashedPassword;
+            await user.save();
+            res.json({ message: "Admin updated successfully!", email });
+        } else {
+            user = new User({ email, password: hashedPassword });
+            await user.save();
+            res.json({ message: "New admin created successfully!", email });
         }
-
-        // Check password
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(401).json({ message: "Invalid Email or Password" });
-        }
-
-        // Generate JWT
-        const token = jwt.sign({ userId: user._id, role: "admin" }, JWT_SECRET, { expiresIn: "24h" });
-        res.json({ token });
     } catch (err) {
-        console.error("Login Error:", err);
-        res.status(500).json({ message: "Server error during login" });
+        res.status(500).json({ message: "Error resetting admin", error: err.message });
     }
 });
 
