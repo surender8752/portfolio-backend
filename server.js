@@ -19,14 +19,21 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use("/api/projects", projectRoutes);
-app.use("/api/contacts", contactRoutes);
-app.get("/", (req, res) => {
-  res.json({ status: "API is running", version: "1.0.1", endpoints: ["/api/projects", "/api/contacts", "/api/auth/login"] });
+app.get("/api/test-auth", (req, res) => {
+  res.json({ message: "Auth routes should be below this", status: "ok" });
 });
 
-console.log("Mounting Auth Routes...");
 app.use("/api/auth", authRoutes);
+app.use("/api/projects", projectRoutes);
+app.use("/api/contacts", contactRoutes);
+
+app.get("/", (req, res) => {
+  res.json({
+    status: "API is running",
+    version: "1.0.2",
+    endpoints: ["/api/test-auth", "/api/projects", "/api/contacts", "/api/auth/login", "/api/auth/signup"]
+  });
+});
 
 mongoose
   .connect(process.env.MONGO_URI)
