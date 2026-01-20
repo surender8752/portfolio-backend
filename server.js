@@ -5,7 +5,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import projectRoutes from "./routes/projectRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
-import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -19,15 +18,14 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/contacts", contactRoutes);
 
 app.get("/", (req, res) => {
   res.json({
     status: "API is running",
-    version: "1.0.3",
-    endpoints: ["/api/projects", "/api/contacts", "/api/auth/login"]
+    version: "1.0.4",
+    endpoints: ["/api/projects", "/api/contacts"]
   });
 });
 
