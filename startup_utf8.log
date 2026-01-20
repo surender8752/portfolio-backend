@@ -1,0 +1,64 @@
+﻿[dotenv@17.2.3] injecting env (1) from .env -- tip: ΓÜÖ∩╕Å  write to custom object with { processEnv: myObject }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ≡ƒöæ add access controls to secrets: https://dotenvx.com/ops
+node : E:\protfolio\backend\no
+de_modules\path-to-regexp\dist
+\index.js:96
+At line:1 char:1
++ node server.js > 
+startup.log 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo          : 
+    NotSpecified: (E:\protfo  
+  lio\ba...ist\index.js:96:   
+ String) [], RemoteExcepti    
+on
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
+            throw new 
+PathError(`Missing parameter 
+name at index ${index}`, str);
+                  ^
+
+PathError [TypeError]: 
+Missing parameter name at 
+index 1: *; visit https://git.
+new/pathToRegexpError for info
+    at name (E:\protfolio\back
+end\node_modules\path-to-regex
+p\dist\index.js:96:19)
+    at parse (E:\protfolio\bac
+kend\node_modules\path-to-rege
+xp\dist\index.js:113:68)
+    at pathToRegexp (E:\protfo
+lio\backend\node_modules\path-
+to-regexp\dist\index.js:267:58
+)
+    at Object.match (E:\protfo
+lio\backend\node_modules\path-
+to-regexp\dist\index.js:237:30
+)
+    at matcher (E:\protfolio\b
+ackend\node_modules\router\lib
+\layer.js:86:23)
+    at new Layer (E:\protfolio
+\backend\node_modules\router\l
+ib\layer.js:93:62)
+    at Function.route (E:\prot
+folio\backend\node_modules\rou
+ter\index.js:428:17)
+    at Function.route (E:\prot
+folio\backend\node_modules\exp
+ress\lib\application.js:257:22
+)
+    at app.<computed> [as 
+options] (E:\protfolio\backend
+\node_modules\express\lib\appl
+ication.js:478:22)
+    at file:///E:/protfolio/ba
+ckend/server.js:18:5 {
+  originalPath: '*'
+}
+
+Node.js v22.14.0

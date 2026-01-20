@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -15,7 +16,7 @@ app.use(cors({
   },
   credentials: true
 }));
-app.options('*', cors()); // Enable pre-flight for all routes
+
 app.use(express.json());
 
 app.use("/api/projects", projectRoutes);
@@ -35,7 +36,13 @@ mongoose
     );
   })
   .catch((err) => {
+    try {
+      fs.writeFileSync('error.txt', `Error: ${err.message}\nStack: ${err.stack}`);
+    } catch (e) {
+      console.error("Failed to write to error.txt", e);
+    }
     console.error("MongoDB Connection Error:", err);
+    process.exit(1);
   });
 
 export default app;
