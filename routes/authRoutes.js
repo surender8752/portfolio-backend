@@ -68,4 +68,41 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// UPDATE PROFILE (Protected)
+router.put("/profile", authMiddleware, async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const userId = req.user.userId;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        if (email) {
+            user.email = email.trim().toLowerCase();
+        }
+
+        if (password) {
+            user.password = await bcrypt.hash(password, 10);
+        }
+
+        await user.save();
+        res.json({ message: "Profile updated successfully" });
+    } catch (err) {
+        console.error("Profile Update Error:", err);
+        res.status(500).json({ message: "Server error during profile update" });
+    }
+});
+
+// GET PROFILE INFO (Protected)
+router.get("/profile", authMiddleware, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.userId).select("-password");
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 export default router;
