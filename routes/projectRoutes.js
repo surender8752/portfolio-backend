@@ -12,7 +12,8 @@ router.get("/", async (req, res) => {
 
 // POST new project
 router.post("/", authMiddleware, async (req, res) => {
-  const project = new Project(req.body);
+  const { title, tech, description, link } = req.body;
+  const project = new Project({ title, tech, description, link });
   const saved = await project.save();
   res.json(saved);
 });
